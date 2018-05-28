@@ -1,0 +1,17 @@
+---
+- name: "make kafka_trustore available"
+  set_fact:
+    kafka_truststore: "{{ app_folder}}/conf/security/trust.jks"
+
+- name: "make kafka_keystore available"
+  set_fact:
+    kafka_keystore: "{{ app_folder}}/conf/security/ap12550-bnppf-client-qa.jks"
+    keystore_type: JKS
+
+- name: Convert load env IPM_TRUSTSTORE_CLIENT_PASSWORD into variable
+  set_fact:
+    truststore_password: "{{ lookup('env', 'IPM_TRUSTSTORE_CLIENT_PASSWORD') }}"
+
+- name: Convert load IPM_TRUSTSTORE_CLIENT_PASSWORD env into variable
+  set_fact:
+    keystore_password: "{{ lookup('env', 'IPM_KEYSTORE_CLIENT_PASSWORD') }}"
