@@ -1,0 +1,96 @@
+---
+# tasks file for springboot
+
+#TODO if service name is empty abort
+- name: "Create {{ item }} folder if not exists"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+  with_items:
+    - "{{ service_deploy_folder }}"
+    - "{{ service_conf_folder }}"
+    - "{{ service_deploy_folder }}/scripts"
+
+- name: "Copy jar application"
+  copy:
+    src: "{{ sb_src_file }}"
+    #TODO change the name of the destination file by having a variable for the src filename and a src path
+    dest: "{{ service_deploy_folder }}/{{ service_name }}.jar"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+x"
+  when: sb_src_file is defined and sb_src_file|length > 0
+  # notify:
+  #   - "Restart application"
+
+- name: "Download springboot application"
+  get_url:
+    url: "{{ sb_src_url }}"
+    dest: "{{ service_deploy_folder }}"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+x"
+  when: sb_src_url is defined
+  # notify:
+  #   - "Restart application"
+
+- name: template start and stop scripts
+  template:
+      src: "templates/{{ item }}.j2"
+      dest: "{{ service_deploy_folder }}/scripts/{{ item }}"
+      owner: "{{ service_user }}"
+      group: "{{ service_group }}"
+      mode: "u+rx"
+  with_items:
+    - start.sh
+    - stop.sh
+
+- name: template application.properties for {{ service_name }}
+  template: 
+    src: "{{ application_template_path }}"
+    dest: "{{ service_conf_folder }}/application.properties"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+r"
+
+- name: template log4j.properties for {{ service_name }}
+  template: 
+    src: "templates/log4j.properties.j2"
+    dest: "{{ service_conf_folder }}/log4j.properties"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+r"
+  when: not data_exists
+
+- name: template log4j2.xml for {{ service_name }}
+  template: 
+    src: "templates/log4j2.xml.j2"
+    dest: "{{ service_conf_folder }}/log4j2.xml"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+r"
+  when: data_exists
+
+- name: "Create data folder"
+  file:
+    path: "{{ service_data_folder }}"
+    state: directory
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+  when: data_exists
+
+- name: Set csv var if need to copy data
+  set_fact:
+    data_file_glob: "files/*.csv" 
+  when: data_exists
+
+- name: copy data file for {{ service_name }}
+  copy:
+    src: "files/AccountInfo.csv"
+    dest: "{{ service_deploy_folder }}/data/"
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+    mode: "u+r"
+  when: data_exists

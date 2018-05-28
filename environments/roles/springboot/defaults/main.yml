@@ -1,0 +1,14 @@
+---
+# defaults file for springboot
+service_name:
+app_folder: /opt/Ap12550
+service_root: services
+service_deploy_folder: "{{ app_folder }}/{{ service_root }}/{{ service_name }}"
+service_conf_folder: "{{ service_deploy_folder }}/config"
+service_scripts_folder: "{{ service_deploy_folder }}/scripts"
+service_data_folder: "{{ service_deploy_folder }}/data"
+
+data_exists: false
+
+service_user: root 
+service_group: root

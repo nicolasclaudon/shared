@@ -1,0 +1,9 @@
+spring_kafka_bootstrap_servers: kafka-itrflux-qua-bk:9092
+#spring_kafka_bootstrap_servers: "PLAINTEXT://s00vl9986300.fr.net.intra:9093,PLAINTEXT://s00vl9986306.fr.net.intra:9093,PLAINTEXT://s00vl9986310.fr.net.intra:9093,PLAINTEXT://s00vl9986348.fr.net.intra:9093"
+app_folder: /applis/12550-ipm00
+spring_kafka_consumer_group_id: ap12550
+log_level: info
+stub_timeout: 5000
+
+service_user: ipm00
+service_group: ipm00

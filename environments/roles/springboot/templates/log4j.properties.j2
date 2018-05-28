@@ -1,0 +1,42 @@
+log4j.rootLogger={{ log_level }}, ConsoleAppender
+log4j.logger.{{ log4j_package_name }}={{ log_level }}, KafkaAppender
+log4j.additivity.inspire.pfl.fundsreservation=false
+log4j.appender.KafkaAppender.Threshold=INFO
+
+log4j.logger.inspire.pfl.fundsreservation.service=DEBUG, KafkaAppMonitoring
+
+log4j.appender.ConsoleAppender=org.apache.log4j.ConsoleAppender
+log4j.appender.ConsoleAppender.Target=System.out
+log4j.appender.ConsoleAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.ConsoleAppender.layout.ConversionPattern=%d{ABSOLUTE} %-5p (%X{sessionID}) [%c{1}:%M:%L] %m%n
+
+log4j.appender.KafkaAppender=org.apache.kafka.log4jappender.KafkaLog4jAppender
+log4j.appender.KafkaAppender.topic={{ log4j_appender_kafka_topic }}
+log4j.appender.KafkaAppender.brokerList={{ spring_kafka_bootstrap_servers }}
+log4j.appender.KafkaAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.KafkaAppender.layout.ConversionPattern={"level":"%p","timestamp":"%d{ISO8601}","thread":"%t","file":"%F", "line":"%L","message":"%m"}%n
+
+
+log4j.appender.KafkaAppender.securityProtocol=SSL
+log4j.appender.KafkaAppender.SslTruststoreLocation={{ kafka_truststore }}
+log4j.appender.KafkaAppender.SslTruststorePassword={{ truststore_password }}
+##log4j.appender.KafkaAppender.SslTruststoreType={{ keystore_type }}
+log4j.appender.KafkaAppender.SslKeystoreLocation={{ kafka_keystore }}
+log4j.appender.KafkaAppender.SslKeystorePassword={{ keystore_password }}
+log4j.appender.KafkaAppender.SslKeystoreType={{ keystore_type }}
+
+
+log4j.appender.KafkaAppMonitoring=org.apache.kafka.log4jappender.KafkaLog4jAppender
+log4j.appender.KafkaAppMonitoring.topic={{ bnppf_sctinst_monitoring }}
+log4j.appender.KafkaAppMonitoring.brokerList={{ spring_kafka_bootstrap_servers }}
+log4j.appender.KafkaAppMonitoring.layout=org.apache.log4j.PatternLayout
+log4j.appender.KafkaAppMonitoring.layout.ConversionPattern={"level":"%p","timestamp":"%d{ISO8601}","thread":"%t","file":"%F", "line":"%L","message":%m}%n
+
+log4j.appender.KafkaAppMonitoring.securityProtocol=SSL
+log4j.appender.KafkaAppMonitoring.SslTruststoreLocation={{ kafka_truststore }}
+log4j.appender.KafkaAppMonitoring.SslTruststorePassword={{ truststore_password }}
+log4j.appender.KafkaAppMonitoring.SslTruststoreType={{ keystore_type }}
+log4j.appender.KafkaAppMonitoring.SslKeystoreLocation={{ kafka_keystore }}
+log4j.appender.KafkaAppMonitoring.SslKeystorePassword={{ keystore_password }}
+log4j.appender.KafkaAppMonitoring.SslKeystoreType={{ keystore_type }}
+

@@ -1,0 +1,13 @@
+- name: "Create app folder if not exists"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ service_user }}"
+    group: "{{ service_group }}"
+  with_items:
+    - "{{ app_folder }}"
+    - "{{ app_conf_folder }}"
+    - "{{ app_logs_folder }}"
+    - "{{ app_security_folder }}"
+    - "{{ app_scripts_folder }}"
+    - "{{ app_pid_folder }}"

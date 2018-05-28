@@ -1,0 +1,21 @@
+stubs_root: "stubs"
+
+# accountvalidation_stub
+accountvalidation_stub_port: 10101
+data_path_av: "{{ service_data_folder }}/AccountInfo.csv"
+
+# authorize_stub
+authorize_stub_port: 10100
+data_path_a: "{{ service_data_folder }}/AccountInfo.csv"
+
+# booking_stub
+booking_stub_port: 10112
+data_path_b: "{{ service_data_folder }}/AccountInfo.csv"
+
+# fundreservation_stub
+fundres_stub_port: 10103
+data_path_fundres: "{{ service_data_folder }}/AccountInfo.csv"
+
+# reservationcancellation_stub
+rescancel_stub_port: 10104
+data_path_rescancel: "{{ service_data_folder }}/AccountInfo.csv"

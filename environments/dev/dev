@@ -1,0 +1,29 @@
+
+[stubs]
+ s00vl9981457 ansible_connection=local
+
+[microservices]
+  s00vl9981457 ansible_connection=local
+
+[gui-frontservers]
+ s00vl9981456 ansible_connection=local
+
+[gui-backservers]
+ s00vl9981456 ansible_connection=local
+
+[gui:children]
+gui-frontservers
+gui-backservers
+
+[kafkabrokers]
+ s00vl9983601 ansible_connection=local
+
+[zkservers]
+ s00vl9983331 ansible_connection=local
+
+[kafka-clusters:children]
+kafkabrokers
+zkservers
+
+[Operationdbservers]
+ localhost ansible_connection=local

@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+#
+
+PROJECT_NAME={{ service_name }}
+SERVICE_USER={{ service_user }}
+SPRINGBOOTAPP_HOME={{ service_deploy_folder }}
+SPRINGBOOTAPP_JAR="$SPRINGBOOTAPP_HOME/$PROJECT_NAME.jar"
+
+
+SPRINGBOOTAPP_JAVA=$(which java)
+
+
+pid_of_spring_boot() {
+    pgrep -f "java.*$PROJECT_NAME"
+}
+
+echo -e "Stopping $PROJECT_NAME...... "
+
+pid=`pid_of_spring_boot`
+[ -n "$pid" ] && kill $pid

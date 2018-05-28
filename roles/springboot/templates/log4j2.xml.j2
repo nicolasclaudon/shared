@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="{{ log_level }}">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss,SSS} %-5p (%X{sessionID}) [%c{1}:%M:%L] %m%n"/>
+    </Console>
+    <File name="MyFile" fileName="logs{{ service_name }}.log" immediateFlush="true" append="true">
+      <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss,SSS} %-5p (%X{sessionID}) [%c{1}:%M:%L] %m%n"/>
+    </File>
+  </Appenders>
+  <Loggers>
+    <Root level="{{ log_level }}">
+      <AppenderRef ref="Console" />
+      <AppenderRef ref="MyFile"/>
+    </Root>
+  </Loggers>
+</Configuration>

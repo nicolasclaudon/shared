@@ -1,0 +1,7 @@
+app_folder:
+app_conf_folder: "{{ app_folder}}/conf"
+app_logs_folder: "{{ app_folder }}/logs"
+app_scripts_folder: "{{ app_folder }}/scripts"
+app_security_folder: "{{ app_conf_folder}}/security"
+app_pid_folder: "{{ app_folder }}/var/lock/subsys"
+

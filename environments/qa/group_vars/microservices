@@ -1,0 +1,66 @@
+log_level: info
+service_root: "services"
+
+
+#SSL truststore and keystore
+#kafka_truststore: 
+#kafka_keystore:
+#truststore_password: 123456
+#keystore_password: 123456
+
+# log4j
+log4j_appender_kafka_topic: ap12550-bnppf-sctinst-logging
+log4j_package_name: "inspire.pfl.bnppf.{{ service_name }}.service"
+
+# acccountvalidation
+bnppf_accountvalidation_api_url: http://localhost:{{ accountvalidation_stub_port }}/stub/checkAccount
+bnppf_sctinst_request_accountvalidation: ap12550-bnppf-sctinst-accountvalidation
+bnppf_sctinst_response_accountvalidation: ap12550-bnppf-sctinst-accountvalidated
+
+# authorize
+#TODO: no authorize stub ?
+bnppf_authorize_api_url: http://localhost:{{ authorize_stub_port }}/stub/authorize
+bnppf_sctinst_request_authorisation: ap12550-bnppf-sctinst-paymentauthorization
+bnppf_sctinst_response_authorisation: ap12550-bnppf-sctinst-paymentauthorized
+
+# booking
+bnppf_booking_api_url: http://localhost:{{ booking_stub_port }}/stub/booking
+bnppf_sctinst_request_booking: ap12550-bnppf-sctinst-paymentbooking
+bnppf_sctinst_logging: ap12550-bnppf-sctinst-paymentbookingreceived
+
+# fundsreservation
+bnppf_reservation_api_url: http://localhost:{{ fundres_stub_port }}/stub/fundsreservation
+bnppf_sctinst_request_fundsreservation: ap12550-bnppf-sctinst-fundsreservation
+bnppf_sctinst_response_fundsreservation: ap12550-bnppf-sctinst-fundsreserved
+
+# initiatepayment
+initiatepayment_service_port: 10101
+bnppf_sctinst_initiatepayment_topic: ap12550-bnppf-sctinst-initiatepayment
+
+
+# initiaterecall
+
+# bnppf_sctinst_initiaterecall_topic: ap12550-bnppf-sctinst-initiaterecall
+
+# monitoring
+bnppf_sctinst_monitoring: ap12550-bnppf-sctinst-monitoring
+
+# reservationcancellation
+bnppf_reservationcancellation_api_url: http://localhost:{{ rescancel_stub_port }}/stub/reservationcancellation
+bnppf_sctinst_request_reservationcancellation: ap12550-bnppf-sctinst-reservationcancellation
+bnppf_sctinst_response_reservationcancellation: ap12550-bnppf-sctinst-reservationcancelled
+
+# reservationrollback
+bnppf_sctinst_reservationrollback: ap12550-bnppf-sctinst-reservationrollback
+
+# uniqueid
+uniqueid_service_port: 40101
+
+#TODO port to debug starting should disapear later on
+# accountvalidation_port: 9001
+# authorize_port: 9002
+# booking_port: 9003
+# fundsreservation_port: 9004
+# monitoring_port: 9005
+# reservationcancellation_port: 9006
+# reservationrollback_port: 9007

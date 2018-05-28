@@ -1,0 +1,12 @@
+app_folder: /applis/12550-ipm00
+kafka_truststore: "{{ app_security_folder }}/ap12550-bnppf-client-qa.p12"
+kafka_keystore: "{{ app_security_folder }}/ap12550-bnppf-client-qa.p12"
+service_user: "ipm00"
+service_group: "ipm00"
+log_level: info
+stub_timeout: 5000
+
+# KAFKA
+#######
+spring_kafka_bootstrap_servers: s00vl9983599.fr.net.intra:9092
+spring_kafka_consumer_group_id: ap12550
