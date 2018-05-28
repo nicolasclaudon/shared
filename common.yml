@@ -1,0 +1,5 @@
+- name: Define facts for the deployment
+  include: set_facts.yml
+
+- include_role:
+    name: app_folder
